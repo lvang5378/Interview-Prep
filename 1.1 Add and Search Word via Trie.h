@@ -43,7 +43,10 @@ private:
                 TrieNode* tmp = run;
                 for (int j = 0; j < 26; j++) {
                     run = tmp -> children[j];
-                    if (query(word + i + 1, run))  //this method use DFS, find the word recursively
+                    if (query(word + i+1 , run))  //this method use DFS, find the word recursively 
+						//word+i+1 means shift the word to the (i+1)'th character
+						//word+1 means shift word by 1 character, "apple" become "pple"
+						//at this condition, ith character is '.', so we need to shift (i+1) position
                         return true;
                 }
             }
