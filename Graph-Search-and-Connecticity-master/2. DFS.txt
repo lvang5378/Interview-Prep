@@ -1,0 +1,21 @@
+DFS:   explore aggressively only backtrack when necessary 
+
+-also compute a topological ordering of a directed acyclic graph
+-and strongly connected components of directed graphs
+RUNTIME O(m+n)
+
+Code:
+minic BFS code, use a stack instead of a queue [+ minor other modifications]
+
+Recusive version: 
+DFS(graph G, start vertex s)
+-mark s as explored
+-for every edge (s, v):
+  -if v unexplored
+    -DFS(G, v)
+
+Claim 1. at end of the algorithm, v marked as explored <=> exist path from s to v in G
+Reason: particular instantiatin of generic seach procedure
+
+Claim2 runing time is O(m+n)
+Reason: look at each node in connected component of s at most once, each edge at most twice

@@ -1,0 +1,112 @@
+/*************************************************
+DFS_Loop (graph G)
+-mark all nodes unexplored
+-current_label =n [to keep track of ordering]
+-for each vectex v E G{
+  -if v not yet explored [in same previous DFS call]{
+    -DFS (G, v)
+  }
+}
+
+DFS(graph G, start vertex s)
+-mark s explored
+-for every edge (s, v){
+  -if v not yet explored
+    -DFS(G, v)
+}
+-set F(s) = current_label 
+-current_label --                    //first time execute this line is at the deepest vertex of the graph 
+
+
+NOTE:If there is a cycle in the graph, then there is no valid topological order
+
+***     Time complexity O(m+n)                                     ***
+***	Reason: O(1) time per node, O(1) time per edge             ***
+***	Correctness: if(u,v) is an edge, then f(u) < f(v)          ***
+
+***********************************************************/
+
+class course_schedule_II_revised{
+
+	vector<unordered_set<int> > edges;//presented in adjacent list
+	unordered_map<int, bool> explored;
+	int currLabel;
+	unordered_map<int, int> labels;
+	unordered_set<int> already_started;
+
+public:
+
+	vector<int> DFS_Loop (int numCourses, vector<pair<int, int>>& prerequisites);
+	bool DFS_Rec (int startVec);
+
+
+	void test();
+
+};
+
+
+
+
+
+vector<int> course_schedule_II_revised::DFS_Loop(int numCourses, vector<pair<int, int>>& prerequisites) {
+	
+	edges.resize(numCourses);
+	for(pair<int, int> p: prerequisites){
+		edges[p.second].insert(p.first);
+	}	
+	
+	for(int i =0;i<numCourses;i++) explored[i] = false; //marked all verteces un-explored
+	currLabel = numCourses-1;
+	bool noCycle=true;
+	vector<int> result;
+
+	for(int i =0;i<numCourses;i++){
+		if(explored[i]==false){
+			noCycle =  DFS_Rec(i);
+			if(!noCycle){
+				//cout<<"cycle detected"<<endl;
+				return result;//if there is a cycle detected, then return an empty result
+			}else continue;
+		}
+	}
+
+	for(int i =0;i<numCourses;i++) result.push_back(labels[i]);
+	//print result
+	cout<<"result:"<<endl;for(int i =0;i<numCourses;i++) cout<<result[i]<<" ";
+	return result;
+}
+
+bool course_schedule_II_revised::DFS_Rec (int startVec){
+
+	already_started.insert(startVec);
+	explored[startVec] = true;
+	unordered_set<int> e  = edges[startVec];
+	for(int i : e){
+		if(already_started.find(i)!=already_started.end()) {//detect a cycle in the graph
+			return false; 
+		}
+		if(explored[i]==false) {
+			bool cycle = DFS_Rec(i);
+			if(!cycle) return false;
+		}
+	}
+	labels[currLabel] = startVec;
+	currLabel--;
+	already_started.erase(startVec);
+	return true;
+}
+
+void course_schedule_II_revised::test(){
+	int numCourses=4;
+	vector<pair<int, int>> prerequisites;
+	prerequisites.push_back(make_pair(1, 0));
+	prerequisites.push_back(make_pair(2, 0));
+	prerequisites.push_back(make_pair(3, 1));
+	prerequisites.push_back(make_pair(3, 2));
+	//prerequisites.push_back(make_pair(0, 2));
+
+	//vector<vector<int> > results = findOrder(numCourses, prerequisites);
+	//printResults(results);
+	DFS_Loop(numCourses, prerequisites);
+	return;
+}
