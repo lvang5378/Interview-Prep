@@ -1,6 +1,8 @@
-1. quick sort
-2. heap sort
-3. 
+Sorting algorithms' main methods: Partitioning, Merging, Selection, Exchanging, adn their combinations...
+
+1. quick sort  (method: partitioning)
+2. heap sort   (method: selection)
+3. merge sort  (method: Merging)
 
 ###1. Quick Sort   (Partition-exchange sort)
 Quick sort is a Divide and conqure algorithm.   https://en.wikipedia.org/wiki/Quicksort#Algorithm
@@ -49,3 +51,19 @@ The buildMaxHeap() operation is run once, and is O(n) in performance. The siftDo
 - Best case performance	\Omega(n), O(n log n)
 - Average case performance	O(n log n)
 - Worst case space complexity	O(1) auxiliary
+
+---
+###Merge Sort
+In computer science, merge sort (also commonly spelled mergesort) is an efficient, general-purpose, comparison-based sorting algorithm. Most implementations produce a stable sort, which means that the implementation preserves the input order of equal elements in the sorted output. Mergesort is a divide and conquer algorithm.
+
+####Algorithm
+
+#####Conceptually, a merge sort works as follows:
+1. Divide the unsorted list into n sublists, each containing 1 element (a list of 1 element is considered sorted).
+2. Repeatedly merge sublists to produce new sorted sublists until there is only 1 sublist remaining. This will be the sorted list.
+
+####Complexity
+- Worst case performance	O(n log n)
+- Best case performance	    O(n log n) typical,  O(n) natural variant
+- Average case performance	O(n log n)
+- Worst case space complexity	О(n) total, O(n) auxiliary
