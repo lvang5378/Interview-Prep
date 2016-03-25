@@ -1,3 +1,9 @@
+  pointer to classes example    
+  overload operators    
+  static members    
+  const member functions  
+  templates (template specialization)  
+
 ##pointer to classes example
 ```c++
 #include <iostream>
