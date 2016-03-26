@@ -25,4 +25,11 @@ https://gcc.gnu.org/onlinedocs/cpp/Macros.html
 //as to 
 foreach(cookies, i)
     printf("Cookie: %s", cookies[i]);
+//bad example: foreach not recommend in macro use, use BOOST_FOREACH　instead
+/*
+I disagree, chrish. Before lambda's, for_each was a nasty thing, because the code each element was runnnig 
+through was not local to the calling point. foreach, (and I highly recommend BOOST_FOREACH instead of a 
+hand-rolled solution) let's you keep the code close to the iteration site, making it more readable. 
+That said, once lambda's roll out, for_each might once again be the way to go
+*/
 ```
