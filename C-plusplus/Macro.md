@@ -9,3 +9,20 @@
 #define unlink(parm1)           _unlink(parm1)
 #endif
 ```
+---
+
+##3 Macros
+https://gcc.gnu.org/onlinedocs/cpp/Macros.html
+- Object-like Macros
+
+```c++
+   #define BUFFER_SIZE 1024
+```
+- Function-like Macros
+
+```c++
+#define foreach(list, index) for(index = 0; index < list.size(); index++)
+//as to 
+foreach(cookies, i)
+    printf("Cookie: %s", cookies[i]);
+```
